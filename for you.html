@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To You</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Figtree:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+    <style>
+        :root {
+                --night: #0e1325;
+                --night-2: #151b36;
+                --night-3: #232b55;
+                --white: #ffffff;
+                --mist: #c9d0ee;
+                --rose: #f08a9b;
+                --paper: #ffffff;
+                --ink: #2a2036;
+                --rose-deep: #c4566b;
+                --serif: "Instrument Serif", Georgia, serif;
+                --sans: "Figtree", system-ui, sans-serif;
+                --hand: "Caveat", cursive;
+                }
+
+                * { box-sizing: border-box; }
+
+                body {
+                margin: 0;
+                background-color: var(--night);
+                background-image: radial-gradient(ellipse 80% 45% at 50% 0%, var(--night-3), transparent 70%);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                color: var(--mist);
+                font-family: var(--sans);
+                font-size: 16px;
+                line-height: 1.6;
+                text-align: center;
+                padding: 0 16px;
+                }
+
+                .hero { padding-top: 64px; }
+
+                .eyebrow {
+                font-size: 12px;
+                letter-spacing: .22em;
+                text-transform: uppercase;
+                margin: 0 0 10px;
+                }
+
+                h1 {
+                font-family: var(--serif);
+                font-weight: 400;
+                font-size: clamp(42px, 12vw, 68px);
+                line-height: 1.05;
+                margin: 0;
+                color: var(--white);
+                }
+
+                h1 em { color: var(--rose); }
+
+                main {
+                    position: relative;
+                    z-index: 1;
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding-bottom: 48px;
+                }
+
+                .letter {
+                    margin-top: 40px;
+                    background-color: var(--paper);
+                    background-image: repeating-linear-gradient(transparent 0 35px, rgba(196, 86, 107, .1) 35px 36px);
+                    background-position: 0 30px;
+                    color: var(--ink);
+                    text-align: left;
+                    border-radius: 6px;
+                    padding: 40px;
+                    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .65);
+                    transform: rotate(-.4deg);
+                }
+
+                .letter .date {
+                    font-size: 12px;
+                    letter-spacing: .18em;
+                    text-transform: uppercase;
+                    color: rgba(42, 32, 54, .55);
+                    margin: 0 0 28px;
+                }
+                
+                .letter .greeting {
+                    font-family: var(--serif);
+                    font-style: italic;
+                    font-size: 36px;
+                    line-height: 1.1;
+                    margin: 0 0 20px;
+                }
+
+                .letter p {
+                    font-family: var(--serif);
+                    font-size: 22px;
+                    line-height: 36px;
+                    margin: 0 0 36px;
+                }
+
+                .sign .closing {
+                    font-family: var(--serif);
+                    font-style: italic;
+                    font-size: 22px;
+                    margin: 8px 0 0;
+                }
+
+                .sign .name {
+                    font-family: var(--hand);
+                    font-size: 42px;
+                    color: var(--rose-deep);
+                     margin: 6px 0 0;
+                }
+                #sky {
+                    position: fixed;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                    pointer-events: none;
+                }
+                .memory { margin-top: 60px; text-align: center; }
+
+                .memory h2 {
+                    font-family: var(--serif);
+                    font-weight: 400;
+                    font-size: clamp(30px, 8vw, 42px);
+                    margin: 0 0 4px;
+                    color: var(--white);
+                }
+
+                .memory .sub { margin: 0 0 14px; font-size: 15px; }
+
+                .scene-wrap {
+                    background: linear-gradient(#a8d8ff, #eaf6ff);  /* day sky */
+                    border: 1px solid rgba(255, 255, 255, .14);
+                    border-radius: 14px;
+                    padding: 10px 10px 2px;
+                    box-shadow: 0 20px 50px -24px rgba(0, 0, 0, .8);
+                }
+
+                .scene { width: 100%; height: auto; display: block; }
+
+                .caption {
+                    font-family: var(--hand);
+                    font-size: 27px;
+                    color: var(--rose);
+                    margin: 12px 0 0;
+                    line-height: 1.2;
+                }
+
+                .stick {
+                    fill: none;
+                    color: #2a2036;
+                    stroke: currentColor;
+                    stroke-width: 3;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                }
+                .stick .fine { stroke-width: 2; }
+
+            
+                .girl-head {
+                transform-box: fill-box;
+                transform-origin: 50% 66%;
+                animation: lean 7s ease-in-out infinite;
+                }
+                .guy-head {
+                transform-box: fill-box;
+                transform-origin: 50% 100%;
+                animation: nudge 7s ease-in-out infinite;
+                }
+                @keyframes lean {
+                0%, 25%, 100% { transform: rotate(0); }
+                45%, 75%      { transform: rotate(-14deg); }
+                }
+                @keyframes nudge {
+                0%, 25%, 100% { transform: rotate(0); }
+                45%, 75%      { transform: rotate(5deg); }
+                }
+
+              
+                .leg {
+                transform-box: fill-box;
+                transform-origin: 50% 0;
+                animation: swing 2.6s ease-in-out infinite;
+                }
+                .leg.b { animation-delay: -1.3s; }
+                @keyframes swing {
+                0%, 100% { transform: rotate(-6deg); }
+                50%      { transform: rotate(6deg); }
+                }
+
+                .love {
+                transform-box: fill-box;
+                transform-origin: center;
+                opacity: 0;
+                animation: love 7s ease-in-out infinite;
+                }
+                @keyframes love {
+                0%, 40% { opacity: 0; transform: translateY(6px) scale(.6); }
+                55%     { opacity: 1; transform: translateY(0) scale(1); }
+                85%     { opacity: 0; transform: translateY(-26px) scale(1.2); }
+                100%    { opacity: 0; }
+                }
+
+                
+                .sun-rays {
+                transform-box: fill-box;
+                transform-origin: center;
+                animation: spin 40s linear infinite;
+                }
+                @keyframes spin { to { transform: rotate(360deg); } }
+
+           
+                @media (prefers-reduced-motion: reduce) {
+                *, *::before, *::after { animation: none !important; }
+                }
+
+                .sway {
+                    transform-box: fill-box;
+                    transform-origin: 50% 100%;
+                    animation: sway 4.5s ease-in-out infinite;
+                }
+                @keyframes sway {
+                    0%, 100% { transform: rotate(-3deg); }
+                    50%      { transform: rotate(3deg); }
+                }
+
+              
+                .fawn-head {
+                    transform-box: fill-box;
+                    transform-origin: 85% 85%;
+                    animation: graze 6s ease-in-out infinite;
+                }
+                @keyframes graze {
+                    0%, 40%, 100% { transform: rotate(0); }
+                    55%, 80%      { transform: rotate(-24deg); }
+                }
+                .ear {
+                    transform-box: fill-box;
+                    transform-origin: 50% 100%;
+                    animation: flick 4s infinite;
+                }
+                @keyframes flick {
+                    0%, 90%, 100% { transform: rotate(0); }
+                    94%           { transform: rotate(-18deg); }
+                }
+                .send {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 56px;
+                    text-align: center;
+                    }
+
+                .send button {
+                    font-family: var(--sans);
+                    font-size: 17px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    background: var(--rose);
+                    color: #2b1020;
+                    border: 0;
+                    border-radius: 999px;
+                    padding: 15px 32px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    transition: transform .15s ease, background .2s ease;
+                }
+                .send button:hover { background: #f7a3b1; }
+                .send button:active { transform: scale(.95); }
+                .send button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+                .send .reply {
+                    font-family: var(--hand);
+                    font-size: 28px;
+                    color: var(--white);
+                    min-height: 34px;
+                    margin: 0;
+                }
+                .send small { font-size: 13px; }
+
+                    
+                .kiss {
+                    position: fixed;
+                    pointer-events: none;
+                    z-index: 5;
+                    animation: float 1.9s ease-out forwards;
+                    }
+                    @keyframes float {
+                    0%   { transform: translate(0, 0) scale(.6) rotate(var(--r)); opacity: 0; }
+                    15%  { opacity: 1; }
+                    100% { transform: translate(var(--dx), -230px) scale(1.4) rotate(var(--r)); opacity: 0; }
+                }
+    </style>
+</head>
+<body>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <symbol id="tulip" viewBox="0 0 40 100">
+        <path d="M20 40V98" stroke="#5d8f62" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M20 94C6 84 4 66 9 56c9 8 13 22 11 38Z" fill="#6fa574"/>
+        <path d="M20 94C32 86 35 72 31 62c-8 8-12 20-11 32Z" fill="#5d8f62"/>
+        <path d="M8 15C7 29 12 40 20 44C16 34 14 24 14 12Z" style="fill:var(--t1,#f3a9bb);stroke:var(--tl,none);stroke-width:1"/>
+        <path d="M32 15C33 29 28 40 20 44C24 34 26 24 26 12Z" style="fill:var(--t1,#f3a9bb);stroke:var(--tl,none);stroke-width:1"/>
+        <path d="M14 12C14 26 16 37 20 44C24 37 26 26 26 12L20 5Z" style="fill:var(--t2,#ec7f9a);stroke:var(--tl,none);stroke-width:1"/>
+    </symbol>
+
+    <symbol id="rose" viewBox="0 0 50 100">
+        <path d="M25 38V98" stroke="#5d8f62" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M25 80C10 78 5 66 8 58c11 0 17 8 17 22Z" fill="#6fa574"/>
+        <path d="M25 66C38 64 44 54 42 46c-11 0-17 8-17 20Z" fill="#5d8f62"/>
+        <circle cx="25" cy="24" r="18" style="fill:var(--r1,#d9506f);stroke:var(--rl,none);stroke-width:1"/>
+        <path d="M10 22C12 10 30 6 38 16" style="stroke:var(--r3,#b83a58)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="25" cy="25" r="12" style="fill:var(--r2,#e5708b)"/>
+        <path d="M16 24C18 15 31 14 34 23" style="stroke:var(--r3,#b83a58)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="25" cy="26" r="6.5" style="fill:var(--r1,#d9506f)"/>
+        <path d="M21 26C21 22 28 22 28 26" style="stroke:var(--r3,#b83a58)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M12 36C18 42 32 42 38 36" style="stroke:var(--r3,#b83a58)" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/>
+    </symbol>
+        <symbol id="lips" viewBox="0 0 40 28">
+            <path d="M2 14C8 4 14 2 20 7C26 2 32 4 38 14C30 12 24 12 20 13C16 12 10 12 2 14Z" fill="#f08a9b"/>
+            <path d="M2 14C10 14 14 14 20 13C26 14 30 14 38 14C34 24 26 27 20 27C14 27 6 24 2 14Z" fill="#e0677d"/>
+            <path d="M12 19C16 22 24 22 28 19" stroke="#fff" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".5"/>
+    </symbol>
+    </svg>
+    <canvas id="sky"></canvas>
+    <main>
+        <header class="hero">
+            <p class="eyebrow">A letter, just for you</p>
+            <h1>For <em>my beloved, Amira</em></h1>
+        </header>
+
+        <article class="letter">
+            <p class="date">November 11</p>
+            <p class="greeting">My love,</p>
+
+            <p>I want to start this by letting you know that I love you very dearly. My love for you soars through the clouds and into the night skies that we both share. It pours more than the rainiest of rainfalls, and shines brighter than any light that falls into your eyes. Loving you from afar has been difficult for me. Moving hasn’t been great as you can see very clearly. I’m homesick. I’m missing home, you. And it’s taking a toll on me like nothing has ever in so long. It’s probably really bad and selfish but I find myself clinging on to you more than ever. It hits me really hard when I don’t have you around. It pains me. I’ve never longed for someone the way I have and am for you. Your absence leaves me hollow. Though I know you have a life of your own to live, things to do and I can’t follow you everywhere. I’ve been really selfish. I’ve been hurting and I’ve poured my sorrows onto you. I have gone about things in a horrible way, I’m really not proud of. I’ve been something to you that I’ve not wanted to be. A burden (or something along those lines). I have been really unappreciative, really misunderstanding, hard to reach out, and just worse things piled up. I do want to tell you, even though at times it may not seem like it, your presence does wonders to me. It saves me. Though I don’t say it directly, it’s all that keeps me going. I find myself just wanting more and when I know this is all I have, it hurts me. Everything you say is right, and I am aware of it all more than anyone. But my love, it’s hard for me to accept, hard to start anew. I am trying. I haven’t been loving you right, I haven’t been good to you. I want to carry on, but it’s been difficult. I’m taking one day at a time. Usually it's the loneliness that gets to me. Everyone has everyone, and I had no one of the sort. The daytime eats me alive. I seem to be stopping myself subconsciously. As of now, carrying on almost sounds like betrayal. Like I'm letting go. I love you, no matter what I feel. I love you, no matter how bad the day is. I love you, no matter what comes in between us. I may feel a lot of things, some that aren’t good too. But that never collides with what I truly feel for you. It hurts me, seeing you hurt. It’s the last thing I want. Through all the pain, the only other thing I feel is the love I have for you, and the love you have for me. I realize that you make it so easy to love you, with all the things you do for me. All my dreams are memories of us, memories of you, your voice and face. I want to apologize darling, your love means everything to me. You mean everything to me. I promise I’m trying, and I don’t know what that means yet but I’m trying. Please bear with me, be patient while I get through my worst times, while I can’t seem to get my words right, while I slip up. You’re all I need and I’m trying to get by with what I have love and it’s been hard. I love you, and I want you more than anything. I love you darling, I love you most. I want to be there. I want you here. I want you. I need you. Your beauty is the essence of my soul, the light in my eyes, the spark in my heart., and I never want to lose that.</p>
+            <p>I love you, amira</p>
+
+            <div class="sign">
+                <p class="closing">Always.</p>
+                <p class="name">Ayyub</p>
+            </div>
+        </article>
+
+        <section class="memory">
+            <h2>Our bench</h2>
+            <p class="sub">A place with memories</p>
+
+            <div class="scene-wrap">
+                <svg class="scene" viewBox="0 0 460 270">
+
+                    <circle cx="400" cy="46" r="18" fill="#ffd34d"/>
+                    <circle cx="400" cy="46" r="30" fill="none" stroke="#ffd34d" stroke-width="10" stroke-dasharray="3 12.7" stroke-linecap="round"/>
+
+                    <path d="M0 240H460" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+
+                    <use class="sway" href="#tulip" x="34" y="166" width="30" height="75" style="--t1:#fff;--t2:#f3f0f5;--tl:#b9a9c9"/>
+                    <use class="sway" href="#rose" x="58" y="178" width="30" height="60" style="animation-delay:-1.5s"/>
+                    <use class="sway" href="#tulip" x="338" y="170" width="26" height="65" style="animation-delay:-2.5s"/>
+
+                        <g class="stick">
+
+                        
+                        <path d="M108 100V172M312 100V172"/>
+                        <path d="M100 108H320M100 130H320"/>
+                        <path d="M92 172H328" stroke-width="4"/>
+                        <path d="M112 172V240M308 172V240"/>
+
+                        
+                        <path d="M188 111V168"/>
+                        <path d="M188 126L166 156"/>
+                        <path d="M188 126L214 158"/>
+
+                        <g class="leg">
+                            <path d="M188 168L181 232L171 234"/>
+                        </g>
+                        <g class="leg b">
+                            <path d="M188 168L195 232L205 234"/>
+                        </g>
+
+                        <g class="guy-head">
+                            <circle cx="188" cy="96" r="15"/>
+                            <path class="fine" d="M174 91Q176 80 188 80Q200 80 202 91"/>
+                            <circle cx="183" cy="96" r="1.5" fill="currentColor" stroke="none"/>
+                            <circle cx="193" cy="96" r="1.5" fill="currentColor" stroke="none"/>
+                            <path class="fine" d="M183 102Q188 106 193 102"/>
+                        </g>
+
+                        
+                        <path d="M240 111V140"/>
+                        <path d="M240 138L216 172H264Z" style="fill:rgba(240,138,155,.3)"/>
+                        <path d="M240 126L214 158"/>
+                        <path d="M240 126L264 156"/>
+
+                        <g class="leg b">
+                            <path d="M232 172L230 230L220 232"/>
+                        </g>
+                        <g class="leg">
+                            <path d="M248 172L250 230L260 232"/>
+                        </g>
+
+                        <g class="girl-head">
+                            <path class="fine" d="M225 94C221 112 225 124 232 128M255 94C259 112 255 124 248 128"/>
+                            <circle cx="240" cy="96" r="15"/>
+                            <path class="fine" d="M225 92Q240 74 255 92"/>
+                            <circle cx="252" cy="84" r="4" fill="#f08a9b" stroke="none"/>
+                            <circle cx="235" cy="96" r="1.5" fill="currentColor" stroke="none"/>
+                            <circle cx="245" cy="96" r="1.5" fill="currentColor" stroke="none"/>
+                            <path class="fine" d="M235 102Q240 106 245 102"/>
+                        </g>
+
+                        <!-- holding hands -->
+                        <circle cx="214" cy="158" r="3.5" fill="currentColor" stroke="none"/>
+                        </g>
+
+                        <!-- the heart that floats up (this goes AFTER the closing </g> above) -->
+                        <g transform="translate(214,66)">
+                        <path class="love" d="M0 6C-10 -4 -5 -12 0 -6C5 -12 10 -4 0 6Z" fill="#f08a9b"/>
+                    </g>
+
+                <g transform="translate(374,172)" class="stick" style="stroke-width:2.5">
+                <path d="M28 46L26 68M37 48L36 68M57 48L58 68M66 46L68 68"/>
+                <ellipse cx="46" cy="36" rx="26" ry="13" style="fill:rgba(217,160,102,.45)"/>
+                <circle cx="36" cy="30" r="1.8" fill="currentColor" stroke="none"/>
+                <circle cx="46" cy="28" r="1.8" fill="currentColor" stroke="none"/>
+                <circle cx="56" cy="30" r="1.8" fill="currentColor" stroke="none"/>
+                <circle cx="42" cy="38" r="1.8" fill="currentColor" stroke="none"/>
+                <circle cx="52" cy="38" r="1.8" fill="currentColor" stroke="none"/>
+                <path d="M71 31L78 27"/>
+
+                <g class="fawn-head">
+                    <path d="M26 30L15 15M33 27L23 12"/>
+                    <circle cx="13" cy="11" r="8" style="fill:rgba(217,160,102,.45)"/>
+                    <path d="M7 14L-1 17"/>
+                    <circle cx="-2" cy="17" r="1.5" fill="currentColor" stroke="none"/>
+                    <circle cx="12" cy="9" r="1.4" fill="currentColor" stroke="none"/>
+                    <g class="ear"><path d="M17 4Q23 -4 24 -1Q22 4 19 6"/></g>
+                    <g class="ear" style="animation-delay:-2s"><path d="M9 3Q5 -5 3 -3Q4 2 7 5"/></g>
+                </g>
+                </g>
+                </svg>
+            </div>
+
+            <p class="caption">[Grow and Gather]</p>
+        </section>
+        <div class="send">
+            <button type="button" id="kissBtn">
+                <svg width="30" heigh="21" viewBox="0 0 40 28" aria-hidden="true"><use href="#lips"/></svg>
+                <span id="kissLabel">A kiss </span>
+            </button>
+            <p class="reply" id="kissReply" aria-live="polite"></p>
+            <small id="kissCount">No kisses yet..  </small>
+        </div>
+    </main>
+<script>
+    var canvas = document.getElementById("sky");
+    var ctx = canvas.getContext("2d");
+    var W, H;
+    var stars = [];
+
+    function setup() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        stars = [];
+        var count = Math.round((W * H) / 8000);
+        for (var i = 0; i < count; i++){
+            stars.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                size: Math.random() * 1.3 + 0.3,
+                phase: Math.random() * 6.28,
+                speed: Math.random() * 0.0025 + 0.0008
+            });
+        }
+    }
+
+    function draw(time) {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "#e8ecff";
+        for (var i = 0; i < stars.length; i++){
+            var s = stars[i];
+            ctx.globalAlpha = 0.3 + 0.6 * Math.abs(Math.sin(s.phase + time * s.speed));
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, 6.283);
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    }
+
+    setup();
+    window.addEventListener("resize", setup);
+    requestAnimationFrame(draw);
+
+        
+        var AFTER_LABEL = "Again?";                     
+        var COUNT_ONE   = "1 kiss sent";     
+        var COUNT_MANY  = "{n} kisses sent";  
+        var KISS_REPLIES = [                            
+        "I love you darling",
+        "I want the best always.",
+        "It's always you",
+        "Look up. We're under the same sky.",
+        "I love you most",
+        "How many packks.. sixxx",
+        "I love you always"
+        ];
+
+        var kissBtn = document.getElementById("kissBtn");
+        var kissLabel = document.getElementById("kissLabel");
+        var kissReply = document.getElementById("kissReply");
+        var kissCountText = document.getElementById("kissCount");
+        var kisses = 0;
+
+        function removeLater(el) {
+        setTimeout(function () { el.remove(); }, 2400);
+        }
+
+        kissBtn.addEventListener("click", function () {
+        kisses++;
+        kissLabel.textContent = AFTER_LABEL;
+        kissReply.textContent = KISS_REPLIES[(kisses - 1) % KISS_REPLIES.length];
+        kissCountText.textContent = kisses === 1 ? COUNT_ONE : COUNT_MANY.replace("{n}", kisses);
+
+        var r = kissBtn.getBoundingClientRect();
+        for (var j = 0; j < 5; j++) {
+            var el = document.createElement("span");
+            el.className = "kiss";
+            el.innerHTML = '<svg width="36" height="26" viewBox="0 0 40 28" aria-hidden="true"><use href="#lips"/></svg>';
+            el.style.left = (r.left + r.width / 2 - 18 + (Math.random() * 120 - 60)) + "px";
+            el.style.top = (r.top + 4) + "px";
+            el.style.setProperty("--dx", (Math.random() * 140 - 70) + "px");
+            el.style.setProperty("--r", (Math.random() * 50 - 25) + "deg");
+            el.style.animationDelay = (j * 90) + "ms";
+            document.body.appendChild(el);
+            removeLater(el);
+        }
+        });
+</script>
+</body>
+</html>
